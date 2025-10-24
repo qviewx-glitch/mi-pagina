@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qviewx | Consultoría & Automatizaciones | Expertos en n8n y Make</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        (function(){emailjs.init('xpJNETIDIM09PeDpq');})();
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066FF',
+                        secondary: '#1E3A8A',
+                        accent: '#3B82F6',
+                        dark: '#0F172A',
+                        light: '#F8FAFC'
+                    }
+                }
+            }
+        }
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -18,10 +29,10 @@
         .hero-shimmer { position: relative; overflow: hidden; }
         .hero-shimmer::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(0, 102, 255, 0.1) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(0,102,255,0.1) 50%, transparent 70%);
             animation: shimmer 8s ease-in-out infinite;
         }
-        @keyframes shimmer { 0%,100% { transform: translate(-50%, -50%) rotate(0deg); } 50% { transform: translate(50%, 50%) rotate(180deg); } }
+        @keyframes shimmer { 0%,100%{transform:translate(-50%,-50%) rotate(0deg);}50%{transform:translate(50%,50%) rotate(180deg);} }
         .hero-content { position: relative; z-index: 1; }
         .tech-image-hover { transition: transform 0.4s ease, box-shadow 0.4s ease; }
         .tech-image-hover:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3); }
@@ -29,57 +40,67 @@
 </head>
 <body class="bg-dark text-light">
 
-    <!-- ...Navigation y Hero Section igual que tu HTML actual... -->
+<!-- Aquí copia todas tus secciones de navegación, hero, servicios, tecnologías y beneficios -->
 
-    <!-- Contact Section -->
-    <section id="contacto" class="py-20 px-4 bg-secondary/20">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contactanos</h2>
-                <p class="text-xl text-light/70 text-pretty">Estamos listos para ayudarte a automatizar tu negocio</p>
-            </div>
-
-            <div class="bg-dark border border-accent/30 rounded-2xl p-8 md:p-12">
-                <form id="contact-form" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Nombre</label>
-                            <input type="text" name="user_name" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="Tu nombre" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Email</label>
-                            <input type="email" name="user_email" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="tu@email.com" required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Empresa</label>
-                        <input type="text" name="user_empresa" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="Nombre de tu empresa">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">¿Qué necesitas automatizar?</label>
-                        <textarea name="message" rows="5" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-primary hover:bg-accent text-white font-semibold px-8 py-4 rounded-lg transition-all hover:scale-105">Enviar Mensaje</button>
-                </form>
-            </div>
+<!-- Contact Section -->
+<section id="contacto" class="py-20 px-4 bg-secondary/20">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Contactanos</h2>
+            <p class="text-xl text-light/70 text-pretty">Estamos listos para ayudarte a automatizar tu negocio</p>
         </div>
-    </section>
+        <div class="bg-dark border border-accent/30 rounded-2xl p-8 md:p-12">
+            <form class="space-y-6" onsubmit="return enviarFormulario(event)">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Nombre</label>
+                        <input type="text" name="nombre" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="Tu nombre" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email</label>
+                        <input type="email" name="email" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="tu@email.com" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Empresa</label>
+                    <input type="text" name="empresa" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors" placeholder="Nombre de tu empresa" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">¿Qué necesitas automatizar?</label>
+                    <textarea name="mensaje" rows="5" class="w-full bg-secondary/50 border border-accent/30 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-accent text-white font-semibold px-8 py-4 rounded-lg transition-all hover:scale-105">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</section>
 
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            emailjs.sendForm('service_qviewx', 'template_contacto', this)
-                .then(function() {
-                    alert('Mensaje enviado con éxito!');
-                    document.getElementById('contact-form').reset();
-                }, function(error) {
-                    alert('Error al enviar el mensaje: ' + JSON.stringify(error));
-                });
-        });
-    </script>
+<!-- Footer: copiar igual que tu código actual -->
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+   emailjs.init('TU_PUBLIC_KEY_EMAILJS'); // reemplaza por tu Public Key
+})();
+
+function enviarFormulario(e){
+    e.preventDefault();
+    const form = e.target;
+    const datos = {
+        nombre: form.nombre.value,
+        email: form.email.value,
+        empresa: form.empresa.value,
+        mensaje: form.mensaje.value
+    };
+    emailjs.send('service_qviewx','template_contacto',datos)
+        .then(()=>{ alert('Mensaje enviado correctamente'); form.reset(); })
+        .catch(err=>{ alert('Error al enviar, intenta de nuevo'); console.error(err); });
+    return false;
+}
+</script>
+
 </body>
 </html>
 
+      
+       
